@@ -10,6 +10,8 @@ services:
       - 80:80
     depends_on:
       - todo-api-service
+    networks:
+      - front
 
   todo-api-service:
     build: ./backend
@@ -21,7 +23,10 @@ services:
       - MYSQL_DB
     depends_on:
       - database
-  
+    networks:
+      - front
+      - back  
+
   database:
     image: mysql:8.0.29-debian
     environment:
@@ -32,6 +37,12 @@ services:
     volumes:
       - db:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - back
 
 volumes:
   db:
+
+networks:
+  front:
+  back:

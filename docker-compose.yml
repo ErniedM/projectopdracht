@@ -16,19 +16,19 @@ services:
     environment:
       - STORAGE=mysql
       - MYSQL_HOST=database
-      - MYSQL_USER=ernie
-      - MYSQL_PWD=devops
-      - MYSQL_DB=examen
+      - MYSQL_USER
+      - MYSQL_PWD
+      - MYSQL_DB
     depends_on:
       - database
   
   database:
     image: mysql:8.0.29-debian
     environment:
-      MYSQL_DATABASE: 'examen'
-      MYSQL_USER: 'ernie'
-      MYSQL_PASSWORD: 'devops'
-      MYSQL_ROOT_PASSWORD: 'devops'
+      - MYSQL_DATABASE=${MYSQL_DB}
+      - MYSQL_USER
+      - MYSQL_PASSWORD=${MYSQL_PWD}
+      - MYSQL_ROOT_PASSWORD
     volumes:
       - db:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql

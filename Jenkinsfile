@@ -1,4 +1,4 @@
-Pipeline {
+pipeline {
     agent any
     environment {
         MYSQL_USER = credentials('jenkins-app-mysql-user')

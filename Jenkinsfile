@@ -6,14 +6,16 @@ pipeline {
         MYSQL_DB = credentials('jenkins-app-mysql-db')
         MYSQL_ROOT_PASSWORD = credentials ('jenkins-app-mysql-root-password')
     }
-    stages('Build') {
+    stages {
+      stage('Build') {
         steps {
             sh 'docker compose build' 
         }
-    }
-    stages('Deploy') {
+      }
+      stage('Deploy') {
         steps {
             sh 'docker compose up -d'
         }
+      }
     }
 }
